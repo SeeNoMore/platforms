@@ -42,8 +42,11 @@ export default async function middleware(req: NextRequest) {
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     // const session = await getToken({ req });
     const secret = process.env.NEXTAUTH_SECRET;
-    const session = await getToken({ req, secret });
-    console.log("session, middleware.ts", session)
+    const session2 = await getToken({ req, secret });
+    const session = await getToken({ req });
+    console.log("request, middleware.ts", req)
+    console.log("session with secret, middleware.ts", session2)
+    console.log("session W/O secret, middleware.ts", session)
     if (!session && path !== "/login") {
       console.log("debug, middleware.ts", !session && path !== "/login")
       return NextResponse.redirect(new URL("/login", req.url));

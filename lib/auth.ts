@@ -26,6 +26,7 @@ export const authOptions: NextAuthOptions = {
     verifyRequest: `/login`,
     error: "/login", // Error code passed in query string as ?error=
   },
+  debug: true,
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   cookies: {
@@ -84,6 +85,7 @@ export function withSiteAuth(action: any) {
     key: string | null,
   ) => {
     const session = await getSession();
+    console.log("session, auth.ts, withSiteAuth", session)
     if (!session) {
       return {
         error: "Not authenticated",
@@ -111,6 +113,7 @@ export function withPostAuth(action: any) {
     key: string | null,
   ) => {
     const session = await getSession();
+    console.log("session, auth.ts, withPostAuth", session)
     if (!session?.user.id) {
       return {
         error: "Not authenticated",

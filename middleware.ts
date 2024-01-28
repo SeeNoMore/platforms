@@ -41,13 +41,14 @@ export default async function middleware(req: NextRequest) {
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     // const session = await getToken({ req });
-    const session = await getToken({ req });
-    console.log("session", session)
+    const secret = process.env.NEXTAUTH_SECRET;
+    const session = await getToken({ req, secret });
+    console.log("session, middleware.ts", session)
     if (!session && path !== "/login") {
-      console.log("debug", !session && path !== "/login")
+      console.log("debug, middleware.ts", !session && path !== "/login")
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {
-      console.log("debug", session && path == "/login")
+      console.log("debug, middleware.ts", session && path == "/login")
       return NextResponse.redirect(new URL("/", req.url));
     }
     return NextResponse.rewrite(

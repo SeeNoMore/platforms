@@ -12,11 +12,16 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
       profile(profile) {
         return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          gh_username: profile.login,
-          email: profile.email,
-          image: profile.avatar_url,
+          // id: profile.id.toString(),
+          // name: profile.name || profile.login,
+          // gh_username: profile.login,
+          // email: profile.email,
+          // image: profile.avatar_url,
+          id: "1",
+          name: "See",
+          gh_username: "Nomore",
+          email: "dima@react.ge",
+          image: "",
         };
       },
     }),

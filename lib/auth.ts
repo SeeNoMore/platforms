@@ -12,16 +12,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
       profile(profile) {
         return {
-          // id: profile.id.toString(),
-          // name: profile.name || profile.login,
-          // gh_username: profile.login,
-          // email: profile.email,
-          // image: profile.avatar_url,
-          id: "1",
-          name: "See",
-          gh_username: "Nomore",
-          email: "dima@react.ge",
-          image: "",
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          gh_username: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
         };
       },
     }),
@@ -50,12 +45,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     jwt: async ({ token, user }) => {
+      console.log('JWT Callback:', token);
       if (user) {
         token.user = user;
       }
       return token;
     },
     session: async ({ session, token }) => {
+      console.log('Session Callback:', session);
       session.user = {
         ...session.user,
         // @ts-expect-error

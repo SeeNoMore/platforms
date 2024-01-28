@@ -38,13 +38,15 @@ export default async function middleware(req: NextRequest) {
     searchParams.length > 0 ? `?${searchParams}` : ""
   }`;
 
+  console.log("hostname", hostname)
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     // const session = await getToken({ req });
     const secret = process.env.NEXTAUTH_SECRET;
+    const session = await getToken({ req: req, secret: process.env.NEXTAUTH_SECRET })
     const session2 = await getToken({ req, secret });
-    const session = await getToken({ req });
-    console.log("request, middleware.ts", req)
+    // const session = await getToken({ req });
+    // console.log("request, middleware.ts", req)
     console.log("session with secret, middleware.ts", session2)
     console.log("session W/O secret, middleware.ts", session)
     if (!session && path !== "/login") {

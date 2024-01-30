@@ -48,9 +48,12 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.user = user;
       }
+      console.log("SESSION callbacks token ==>", token)
+      console.log("SESSION callbacks user ==>", user)
       return token;
     },
     session: async ({ session, token }) => {
+      console.log("SESSION callbacks 2 ==>", session)
       session.user = {
         ...session.user,
         // @ts-expect-error

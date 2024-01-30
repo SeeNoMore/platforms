@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { getSession } from "next-auth/react"
 
 export const config = {
   matcher: [
@@ -41,7 +42,9 @@ export default async function middleware(req: NextRequest) {
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     const session = await getToken({ req });
+    const session2 = await getSession({ req });
     console.log("SESSION ==> ", session)
+    console.log("SESSION2 ==> ", session2)
     if (!session && path !== "/login") {
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {

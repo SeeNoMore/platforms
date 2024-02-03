@@ -21,7 +21,7 @@ export default async function middleware(req: NextRequest) {
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
   let hostname = req.headers
     .get("host")!
-    .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+    .replace(".localhost:8888", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
 
   // special case for Vercel preview deployment URLs
   if (
@@ -41,13 +41,23 @@ export default async function middleware(req: NextRequest) {
 
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
-    const session = await getToken({ req });
-    const session2 = await getSession({ req });
-    console.log("SESSION ==> ", session)
-    console.log("SESSION2 ==> ", session2)
+    const session = await getToken({ req: req, secret: process.env.NEXTAUTH_SECRET });
+    // const session = {
+    //   user: {
+    //     name: 'seenomore',
+    //     email: null,
+    //     image: 'https://avatars.githubusercontent.com/u/12498007?v=4',
+    //     id: 'clrxw2mb70000jn08fy59h7hr',
+    //     username: 'SeeNoMore'
+    //   },
+    //   expires: '2024-02-29T23:43:49.147Z'
+    // }
+    // console.log("SESSION ==> ", session.user.name === "seenomore" ? "Authorized" : "ATTENTION")
     if (!session && path !== "/login") {
+      console.log("No session, not login page")
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {
+      console.log("Session exits, on login page")
       return NextResponse.redirect(new URL("/", req.url));
     }
     return NextResponse.rewrite(
@@ -64,7 +74,7 @@ export default async function middleware(req: NextRequest) {
 
   // rewrite root application to `/home` folder
   if (
-    hostname === "localhost:3000" ||
+    hostname === "localhost:8888" ||
     hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
   ) {
     return NextResponse.rewrite(

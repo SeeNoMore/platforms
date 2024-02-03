@@ -6,6 +6,7 @@ import prisma from "@/lib/prisma";
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
+  debug: true,
   providers: [
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,
@@ -48,12 +49,9 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.user = user;
       }
-      // console.log("SESSION callbacks token ==>", token)
-      // console.log("SESSION callbacks user ==>", user) // empty
       return token;
     },
     session: async ({ session, token }) => {
-      // console.log("SESSION callbacks 2 ==>", session)
       session.user = {
         ...session.user,
         // @ts-expect-error
@@ -61,7 +59,6 @@ export const authOptions: NextAuthOptions = {
         // @ts-expect-error
         username: token?.user?.username || token?.user?.gh_username,
       };
-      console.log("SESSION FINAL ==> ", session)
       return session;
     },
   },

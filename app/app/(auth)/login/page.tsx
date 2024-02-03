@@ -13,7 +13,7 @@ export default function LoginPage() {
         src="/logo.png"
       />
       <h1 className="mt-6 text-center font-cal text-3xl dark:text-white">
-        Platforms Starter Kit
+        Platforms Starter Kit<br/><span className="text-red-700">[TRY GOOGLE PROVIDER!]</span>
       </h1>
       <p className="mt-2 text-center text-sm text-stone-600 dark:text-stone-400">
         Build multi-tenant applications with custom domains. <br />

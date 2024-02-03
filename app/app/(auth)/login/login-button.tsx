@@ -23,6 +23,7 @@ export default function LoginButton() {
       disabled={loading}
       onClick={() => {
         setLoading(true);
+        // signIn("github", {callbackUrl: "http://app.localhost:8888/api/auth/callback/github"});
         signIn("github");
       }}
       className={`${

@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60bb36a2-243b-4d8d-9120-0c3d8b0a85e8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/[domain]/[slug]/not-found.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/[domain]/[slug]/not-found.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/(auth)/login/login-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/(auth)/login/login-button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/(dashboard)/site/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/(dashboard)/site/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app/(dashboard)/site/[id]/settings/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/app/(dashboard)/site/[id]/settings/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/sitemap.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/sitemap.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/editor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/editor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/post-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/post-card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/site-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/site-card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +52,7 @@
       <updated>1706464884844</updated>
       <workItem from="1706464886442" duration="9854000" />
       <workItem from="1706653378501" duration="5721000" />
-      <workItem from="1706720899926" duration="3103000" />
+      <workItem from="1706720899926" duration="4269000" />
     </task>
     <servers />
   </component>

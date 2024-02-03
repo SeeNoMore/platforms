@@ -52,7 +52,7 @@ export default async function middleware(req: NextRequest) {
     //   },
     //   expires: '2024-02-29T23:43:49.147Z'
     // }
-    // console.log("SESSION ==> ", session.user.name === "seenomore" ? "Authorized" : "ATTENTION")
+    console.log("SESSION MIDDLEWARE ==> ", session)
     if (!session && path !== "/login") {
       console.log("No session, not login page")
       return NextResponse.redirect(new URL("/login", req.url));

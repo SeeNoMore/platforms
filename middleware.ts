@@ -3,6 +3,7 @@ import { getToken } from "next-auth/jwt";
 import { getSession } from "next-auth/react"
 
 export const config = {
+  runtime: 'experimental-edge',
   matcher: [
     /*
      * Match all paths except for:
@@ -41,7 +42,24 @@ export default async function middleware(req: NextRequest) {
 
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
-    const session = await getToken({ req: req, secret: process.env.NEXTAUTH_SECRET });
+    // const session = await getToken({ req: req, secret: process.env.NEXTAUTH_SECRET });
+
+    console.log(process.env.NEXTAUTH_URL + '/api/auth/session')
+    const resSession = await fetch(process.env.NEXTAUTH_URL + '/api/auth/session', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie' : req.headers.get('cookie') || '',
+      },
+      method: 'GET'
+    }).then((res) => res.json()).catch(err => {console.log(err)})
+      // .then((data) => {
+      //   setServices(data.data)
+      //   setServicesLoading(false)
+      // });
+    const session = await resSession;
+
+
+
     // const session = {
     //   user: {
     //     name: 'seenomore',

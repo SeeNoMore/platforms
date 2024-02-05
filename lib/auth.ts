@@ -2,12 +2,11 @@ import { getServerSession, type NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
-  debug: true,
-  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,
@@ -23,13 +22,14 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  pages: {
-    signIn: `/login`,
-    verifyRequest: `/login`,
-    error: "/login", // Error code passed in query string as ?error=
-  },
+  // pages: {
+  //   signIn: `/login`,
+  //   verifyRequest: `/login`,
+  //   error: "/login", // Error code passed in query string as ?error=
+  // },
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
+  secret: process.env.NEXTAUTH_SECRET,
   cookies: {
     sessionToken: {
       name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
@@ -65,16 +65,25 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
+// export function getSession() {
+//   return getServerSession(NextRequest, NextResponse, authOptions) as Promise<{
+//     user: {
+//       id: string;
+//       name: string;
+//       username: string;
+//       email: string;
+//       image: string;
+//     };
+//   } | null>;
+// }
+
 export function getSession() {
-  return getServerSession(authOptions) as Promise<{
-    user: {
-      id: string;
-      name: string;
-      username: string;
-      email: string;
-      image: string;
-    };
-  } | null>;
+  return {user: {
+      name: "seenomore",
+      image: "https://avatars.githubusercontent.com/u/12498007?v=4",
+      id: "clrxw2mb70000jn08fy59h7hr",
+    }
+  }
 }
 
 export function withSiteAuth(action: any) {

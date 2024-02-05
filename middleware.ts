@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import { getSession } from "next-auth/react"
+// import { getToken } from "next-auth/jwt";
+import { getSession } from "./lib/auth";
 
 export const config = {
-  runtime: 'experimental-edge',
   matcher: [
     /*
      * Match all paths except for:
@@ -19,7 +18,7 @@ export const config = {
 export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
-  // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
+  // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:8888)
   let hostname = req.headers
     .get("host")!
     .replace(".localhost:8888", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
@@ -42,40 +41,12 @@ export default async function middleware(req: NextRequest) {
 
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
-    // const session = await getToken({ req: req, secret: process.env.NEXTAUTH_SECRET });
-
-    console.log(process.env.NEXTAUTH_URL + '/api/auth/session')
-    const resSession = await fetch(process.env.NEXTAUTH_URL + '/api/auth/session', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie' : req.headers.get('cookie') || '',
-      },
-      method: 'GET'
-    }).then((res) => res.json()).catch(err => {console.log(err)})
-      // .then((data) => {
-      //   setServices(data.data)
-      //   setServicesLoading(false)
-      // });
-    const session = await resSession;
-
-
-
-    // const session = {
-    //   user: {
-    //     name: 'seenomore',
-    //     email: null,
-    //     image: 'https://avatars.githubusercontent.com/u/12498007?v=4',
-    //     id: 'clrxw2mb70000jn08fy59h7hr',
-    //     username: 'SeeNoMore'
-    //   },
-    //   expires: '2024-02-29T23:43:49.147Z'
-    // }
-    console.log("SESSION MIDDLEWARE ==> ", session)
+    // const session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET, raw:true });
+    const session = await getSession();
+    console.log("MIDDLEWARE ==>", session)
     if (!session && path !== "/login") {
-      console.log("No session, not login page")
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {
-      console.log("Session exits, on login page")
       return NextResponse.redirect(new URL("/", req.url));
     }
     return NextResponse.rewrite(

@@ -82,6 +82,7 @@ export function getSession() {
       name: "seenomore",
       image: "https://avatars.githubusercontent.com/u/12498007?v=4",
       id: "clrxw2mb70000jn08fy59h7hr",
+      email: "dima@react.ge"
     }
   }
 }
